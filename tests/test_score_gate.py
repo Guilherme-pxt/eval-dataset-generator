@@ -144,5 +144,18 @@ class TestGate(unittest.TestCase):
             self.assertTrue((tmp / "r" / "05_gate_bad.json").exists())
 
 
+
+class TestPromptVariants(unittest.TestCase):
+    def test_no_docs_variant_hides_the_documentation(self):
+        from evalgen.assistant import ModelVersion, build_messages
+
+        msgs = build_messages(ModelVersion("x", "m", "v1-no-docs"), "price?", ["plans"], KB_DOCS)
+        self.assertIn("(no documentation retrieved)", msgs[0]["content"])
+        msgs = build_messages(ModelVersion("x", "m", "v1"), "price?", ["plans"], KB_DOCS)
+        self.assertIn("$29 per month", msgs[0]["content"])
+        with self.assertRaises(ValueError):
+            ModelVersion("x", "m", "nope")
+
+
 if __name__ == "__main__":
     unittest.main()

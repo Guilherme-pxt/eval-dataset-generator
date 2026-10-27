@@ -57,6 +57,11 @@ prompt = "v1"
 model = "qwen2.5:7b"
 prompt = "v1-no-policy"
 
+# Same model and prompt as the baseline, retrieval broken (no documentation).
+[versions.retrieval_outage]
+model = "qwen2.5:7b"
+prompt = "v1-no-docs"
+
 [gate]
 # run-all gates every other version against this one; `gate` defaults to `candidate`
 baseline = "baseline"

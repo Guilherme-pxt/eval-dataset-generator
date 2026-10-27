@@ -53,10 +53,14 @@ PROMPTS = {
     # the production prompt
     "v1": "You are the customer support assistant for Ledgerfox, an invoicing app.\n\n"
           + POLICY + "\n\n" + TOOL_DOCS + "\n\n" + OUTPUT_FORMAT + "\n\nDocumentation:\n{context}",
-    # a "simplified" prompt that drops the policy: a realistic regression to catch
+    # a "simplified" prompt that drops the policy block
     "v1-no-policy": "You are a friendly, helpful assistant for Ledgerfox, an invoicing app.\n\n"
           + TOOL_DOCS + "\n\n" + OUTPUT_FORMAT + "\n\nDocumentation:\n{context}",
 }
+# the production prompt with retrieval broken: simulates a release that ships
+# with an empty retriever (no documentation reaches the model)
+PROMPTS["v1-no-docs"] = PROMPTS["v1"]
+NO_CONTEXT_PROMPTS = {"v1-no-docs"}
 
 
 @dataclass(frozen=True)
@@ -71,7 +75,8 @@ class ModelVersion:
 
 
 def build_messages(version: ModelVersion, user_message: str, doc_ids: list[str], kb: dict) -> list[dict]:
-    system = PROMPTS[version.prompt].replace("{context}", context_text(doc_ids, kb))
+    docs = [] if version.prompt in NO_CONTEXT_PROMPTS else doc_ids
+    system = PROMPTS[version.prompt].replace("{context}", context_text(docs, kb))
     return [{"role": "system", "content": system}, {"role": "user", "content": user_message}]
 
 

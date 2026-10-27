@@ -110,22 +110,21 @@ def fact_present(fact: str, text: str) -> bool:
     """Is a short required fact (e.g. "$29 per month") stated in ``text``?
 
     Rule, chosen so a reviewer can predict every verdict:
-    * every number in the fact must appear in the text;
-    * a fact with numbers and at most one content word ("$29 per month",
-      "20% discount") needs nothing else: the number carries it;
-    * otherwise at least half of the fact's content words must appear when it
-      has numbers, 60% when it has none ("CSV or PDF", "Scale plan").
+    * a fact with numbers is present when all of its numbers appear in the text;
+      the words around a number are paraphrased too often to be evidence
+      ("2.9% + $0.30 per transaction" vs "the fee is 2.9% + $0.30");
+    * a fact without numbers ("CSV or PDF", "Scale plan") needs 60% of its
+      content words.
+    Wrong numbers are caught separately by the unsupported-number check.
     """
     fact_nums = extract_numbers(fact, ignore_list_markers=False)
-    if not fact_nums <= extract_numbers(text, ignore_list_markers=False):
-        return False
+    if fact_nums:
+        return fact_nums <= extract_numbers(text, ignore_list_markers=False)
     fact_words = set(content_words(fact))
-    if fact_nums and len(fact_words) <= 1:
-        return True
     if not fact_words:
         return fact.strip().lower() in text.lower()
     coverage = len(fact_words & set(content_words(text))) / len(fact_words)
-    return coverage >= (0.5 if fact_nums else 0.6)
+    return coverage >= 0.6
 
 
 def is_refusal(text: str) -> bool:

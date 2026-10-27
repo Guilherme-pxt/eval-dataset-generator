@@ -26,9 +26,12 @@ class TestNumbers(unittest.TestCase):
 
 
 class TestFactPresent(unittest.TestCase):
-    def test_number_carries_short_fact(self):
+    def test_numbers_carry_numeric_facts(self):
         self.assertTrue(fact_present("$29 per month", "Growth is $29/month."))
         self.assertTrue(fact_present("20% discount", "You save 20% when paying yearly."))
+        # paraphrase seen in the reference run; the old word-coverage rule rejected it
+        self.assertTrue(fact_present("Card payments cost 2.9% + $0.30", "The fee is 2.9% + $0.30 per transaction."))
+        self.assertFalse(fact_present("2.9% + $0.30", "The fee is 2.9% per transaction."))
 
     def test_wrong_number_fails(self):
         self.assertFalse(fact_present("$29 per month", "Growth is $39 per month."))
