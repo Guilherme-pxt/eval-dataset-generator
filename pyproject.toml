@@ -1,0 +1,12 @@
+[project]
+name = "evalgen"
+version = "0.1.0"
+description = "Turn production LLM logs into a reviewed eval set, score model versions against it, and gate releases on regressions."
+readme = "README.md"
+license = "MIT"
+authors = [{ name = "Guilherme Lucena Peixoto" }]
+requires-python = ">=3.11"
+dependencies = ["numpy", "requests"]
+
+[project.scripts]
+evalgen = "evalgen.cli:main"

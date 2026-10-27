@@ -1,0 +1,68 @@
+# Default configuration for `python -m evalgen`. Every value can be overridden
+# with a flag; see `python -m evalgen <command> --help`.
+
+[run]
+seed = 42
+data_dir = "data"            # synthetic production log, ground truth and KB
+run_dir = "runs/latest"      # where each step writes its artifacts
+cache = ".cache/llm.sqlite"  # sqlite3 cache of every LLM call
+
+[synth]
+records = 300
+
+[ingest]
+log = "data/production_log.jsonl"
+# since = "2026-09-01T00:00:00Z"
+# until = "2026-09-15T00:00:00Z"
+# model_version = "assistant-v3.2"
+
+[cluster]
+dedupe_threshold = 0.85
+k_min = 12
+k_max = 32
+budget = 48
+max_failures_per_cluster = 2
+rare_cluster_size = 4
+
+[llm]
+provider = "ollama"          # or "openai_compatible" (EVALGEN_OPENAI_BASE_URL / EVALGEN_OPENAI_API_KEY)
+base_url = "http://localhost:11434"
+temperature = 0.0
+seed = 42
+timeout_s = 300
+
+[draft]
+model = "qwen3.5:9b"
+
+[review]
+# run-all needs decisions without a human in the loop: "oracle" uses the
+# synthetic ground truth; "file" applies an existing decisions file.
+mode = "oracle"
+decisions = ""
+
+[judge]
+model = "qwen3.5:9b"
+
+# A version is a (model, prompt variant) pair. Prompt variants live in evalgen/assistant.py.
+[versions.baseline]
+model = "qwen2.5:7b"
+prompt = "v1"
+
+[versions.candidate]
+model = "qwen2.5-coder:7b"
+prompt = "v1"
+
+# Same model as the baseline, "simplified" prompt without the policy block.
+[versions.prompt_change]
+model = "qwen2.5:7b"
+prompt = "v1-no-policy"
+
+[gate]
+# run-all gates every other version against this one; `gate` defaults to `candidate`
+baseline = "baseline"
+candidate = "candidate"
+metric = "combined"
+max_overall_drop = 0.05
+max_cluster_drop = 0.15
+min_cluster_items = 3
+max_new_failures = 3

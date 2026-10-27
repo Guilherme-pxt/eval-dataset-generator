@@ -1,0 +1,50 @@
+{
+  "plans": {
+    "title": "Plans and pricing",
+    "text": "Ledgerfox offers three plans. Starter costs $12 per month and includes 1 user and up to 50 invoices per month. Growth costs $29 per month and includes up to 5 users and unlimited invoices. Scale costs $79 per month and includes up to 25 users, unlimited invoices, API access and single sign-on (SSO). Paying annually gives a 20% discount on any plan."
+  },
+  "trial": {
+    "title": "Free trial",
+    "text": "Every new workspace starts with a 14-day free trial of the Growth plan. No credit card is required to start the trial. When the trial ends the workspace switches to read-only mode until a plan is chosen."
+  },
+  "refunds": {
+    "title": "Refunds",
+    "text": "Annual plans can be refunded in full within 30 days of purchase. Monthly plans are not refunded, but downgrading gives a prorated credit on the next invoice. Approved refunds reach the original payment method in 5 to 7 business days. Refund requests for a specific account must be opened with the create_refund_request tool."
+  },
+  "invoicing": {
+    "title": "Invoices, reminders, late fees and taxes",
+    "text": "Late fees can be enabled per client, up to 1.5% per month on the overdue balance. Automatic reminders are sent 3, 7 and 14 days after the due date. Invoices can be issued in 32 currencies. Each line item can carry up to 3 tax rates, which covers VAT and GST setups."
+  },
+  "payments": {
+    "title": "Ledgerfox Payments",
+    "text": "Ledgerfox Payments accepts cards and bank transfers through Stripe and PayPal. Card payments cost 2.9% + $0.30 per transaction. Payouts arrive in your bank account 2 business days after the payment clears."
+  },
+  "export": {
+    "title": "Data export and retention",
+    "text": "You can export clients, invoices and payments as CSV or PDF from Settings > Data. Full workspace exports are emailed within 24 hours. Records are retained for 7 years to meet bookkeeping requirements."
+  },
+  "api": {
+    "title": "API and webhooks",
+    "text": "The REST API is available on the Scale plan only. The rate limit is 120 requests per minute per workspace. Failed webhook deliveries are retried 5 times over 24 hours with exponential backoff."
+  },
+  "security": {
+    "title": "Security and data residency",
+    "text": "Two-factor authentication is available on all plans. Single sign-on (SSO) with SAML is included in the Scale plan. Customer data is stored in Frankfurt (EU region) or Virginia (US region), chosen when the workspace is created. Ledgerfox holds a SOC 2 Type II report."
+  },
+  "account": {
+    "title": "Deleting a workspace",
+    "text": "The workspace owner can delete the workspace from Settings > Account. Deleted data is permanently purged after 30 days; until then it can be restored by contacting support. Ownership can be transferred to any admin."
+  },
+  "support": {
+    "title": "Support and disputes",
+    "text": "Chat support is available 24/5, Monday to Friday. Email requests are answered within 1 business day. Phone support is included in the Scale plan. Payment disputes and chargebacks are handled by the payments team: the assistant must escalate them with the escalate_to_human tool."
+  },
+  "mobile": {
+    "title": "Mobile app",
+    "text": "The Ledgerfox mobile app runs on iOS and Android. It scans receipts with on-device OCR and works offline for up to 7 days, syncing when the connection returns."
+  },
+  "invoice_lookup": {
+    "title": "Questions about a specific invoice",
+    "text": "Questions about the status of a specific invoice (for example INV-12345) must be answered by calling the lookup_invoice tool with the invoice ID. The assistant has no other access to invoice data."
+  }
+}

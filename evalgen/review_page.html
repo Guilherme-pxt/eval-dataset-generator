@@ -1,0 +1,241 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Eval Set Review</title>
+<style>
+  :root {
+    --bg: #f6f6f4; --panel: #ffffff; --text: #1d1d1b; --muted: #6b6b66; --line: #e2e1dc;
+    --accent: #2f5d8a; --ok: #2e7d4f; --edit: #9a6a00; --bad: #a33a3a; --chip: #efeee9;
+    --mono: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --bg: #161615; --panel: #1f1f1d; --text: #e9e8e3; --muted: #9b9a93; --line: #34332f;
+      --accent: #7fb0e0; --ok: #6cc391; --edit: #e0b450; --bad: #e07a7a; --chip: #2a2a27;
+    }
+  }
+  * { box-sizing: border-box; }
+  body { margin: 0; background: var(--bg); color: var(--text);
+         font: 14px/1.5 -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; }
+  header { position: sticky; top: 0; z-index: 2; background: var(--panel); border-bottom: 1px solid var(--line);
+           padding: 12px 16px; display: flex; flex-wrap: wrap; gap: 12px; align-items: center; }
+  header h1 { font-size: 16px; margin: 0 12px 0 0; }
+  .counts { display: flex; gap: 10px; color: var(--muted); font-variant-numeric: tabular-nums; }
+  .counts b { color: var(--text); }
+  .spacer { flex: 1; }
+  main { max-width: 980px; margin: 0 auto; padding: 16px; }
+  button, select, input, textarea { font: inherit; color: inherit; }
+  button { background: var(--chip); border: 1px solid var(--line); border-radius: 6px; padding: 6px 12px; cursor: pointer; }
+  button:hover { border-color: var(--muted); }
+  button.primary { background: var(--accent); border-color: var(--accent); color: #fff; }
+  button.accept { color: var(--ok); } button.reject { color: var(--bad); }
+  select, input, textarea { background: var(--bg); border: 1px solid var(--line); border-radius: 6px; padding: 6px 8px; width: 100%; }
+  textarea { min-height: 64px; resize: vertical; }
+  .card { background: var(--panel); border: 1px solid var(--line); border-radius: 10px; padding: 16px; margin-bottom: 14px; }
+  .card[data-state="accept"] { border-left: 4px solid var(--ok); }
+  .card[data-state="edit"] { border-left: 4px solid var(--edit); }
+  .card[data-state="reject"] { border-left: 4px solid var(--bad); opacity: .75; }
+  .meta { display: flex; flex-wrap: wrap; gap: 6px; align-items: center; color: var(--muted); font-size: 12px; }
+  .chip { background: var(--chip); border-radius: 999px; padding: 1px 8px; }
+  .chip.signal { color: var(--bad); }
+  .user { font-size: 15px; margin: 10px 0; }
+  details { margin: 8px 0; color: var(--muted); }
+  details pre { white-space: pre-wrap; font-family: var(--mono); font-size: 12px; color: var(--text); background: var(--bg);
+                padding: 8px; border-radius: 6px; }
+  .grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-top: 10px; }
+  .grid .full { grid-column: 1 / -1; }
+  label { display: block; font-size: 12px; color: var(--muted); margin-bottom: 3px; }
+  .warn { color: var(--edit); font-size: 12px; margin-top: 6px; }
+  .actions { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 12px; align-items: center; }
+  .status { font-size: 12px; color: var(--muted); }
+  @media (max-width: 640px) { .grid { grid-template-columns: 1fr; } }
+</style>
+</head>
+<body>
+<header>
+  <h1 id="title">Eval set review</h1>
+  <div class="counts" id="counts"></div>
+  <div class="spacer"></div>
+  <select id="filter" aria-label="Filter">
+    <option value="all">All items</option>
+    <option value="pending">Pending</option>
+    <option value="accept">Accepted</option>
+    <option value="edit">Edited</option>
+    <option value="reject">Rejected</option>
+  </select>
+  <button id="import">Import decisions</button>
+  <button id="export" class="primary">Export decisions.json</button>
+  <input id="importFile" type="file" accept="application/json" hidden>
+</header>
+<main id="list"></main>
+<script type="application/json" id="data">__REVIEW_DATA__</script>
+<script>
+(function () {
+  "use strict";
+  const DATA = JSON.parse(document.getElementById("data").textContent);
+  const STORE_KEY = "evalgen-review:" + DATA.generated_at;
+  let decisions = {};
+  try { decisions = JSON.parse(localStorage.getItem(STORE_KEY) || "{}"); } catch (e) { decisions = {}; }
+  const save = () => { try { localStorage.setItem(STORE_KEY, JSON.stringify(decisions)); } catch (e) {} };
+
+  document.getElementById("title").textContent = DATA.title;
+
+  function el(tag, attrs, children) {
+    const n = document.createElement(tag);
+    for (const [k, v] of Object.entries(attrs || {})) {
+      if (k === "text") n.textContent = v; else if (k === "class") n.className = v; else n.setAttribute(k, v);
+    }
+    (children || []).forEach(c => c && n.appendChild(c));
+    return n;
+  }
+
+  function canonical(exp) {
+    if (!exp) return null;
+    const keyArgs = t => {
+      const out = {};
+      (DATA.key_args[t.name] || []).forEach(k => { out[k] = String((t.arguments || {})[k] || "").trim(); });
+      return out;
+    };
+    return JSON.stringify({
+      action: exp.action,
+      tool: exp.action === "tool_call" && exp.tool ? { name: exp.tool.name, arguments: keyArgs(exp.tool) } : null,
+      required_facts: exp.action === "answer" ? (exp.required_facts || []) : [],
+      reference_answer: exp.reference_answer || ""
+    });
+  }
+
+  function readForm(card, item) {
+    const action = card.querySelector("[name=action]").value;
+    let tool = null;
+    if (action === "tool_call") {
+      const name = card.querySelector("[name=tool]").value;
+      const args = {};
+      (DATA.key_args[name] || []).forEach(k => { args[k] = card.querySelector("[name=arg]").value.trim(); });
+      tool = { name, arguments: args };
+    }
+    const facts = action === "answer"
+      ? card.querySelector("[name=facts]").value.split("\n").map(s => s.trim()).filter(Boolean) : [];
+    return { action, tool, required_facts: facts, reference_answer: card.querySelector("[name=reference]").value.trim() };
+  }
+
+  function counts() {
+    const c = { accept: 0, edit: 0, reject: 0 };
+    Object.values(decisions).forEach(d => { c[d.decision] = (c[d.decision] || 0) + 1; });
+    const pending = DATA.items.length - c.accept - c.edit - c.reject;
+    const box = document.getElementById("counts");
+    box.replaceChildren();
+    [["pending", pending], ["accepted", c.accept], ["edited", c.edit], ["rejected", c.reject]].forEach(([k, v]) => {
+      box.appendChild(el("span", {}, [el("b", { text: String(v) }), document.createTextNode(" " + k)]));
+    });
+  }
+
+  function card(item) {
+    const exp = item.expected || { action: "answer", tool: null, required_facts: [], reference_answer: "" };
+    const dec = decisions[item.item_id];
+    const shown = dec && dec.expected ? dec.expected : exp;
+    const c = el("section", { class: "card", "data-id": item.item_id, "data-state": dec ? dec.decision : "pending" });
+
+    const meta = el("div", { class: "meta" }, [
+      el("strong", { text: item.item_id }),
+      el("span", { class: "chip", text: "cluster: " + item.cluster_label }),
+      ...item.selection_reasons.map(r => el("span", { class: "chip", text: r })),
+      ...item.failure_signals.map(s => el("span", { class: "chip signal", text: s })),
+      el("span", { class: "chip", text: "seen " + item.group_size + "x" })
+    ]);
+    c.appendChild(meta);
+    c.appendChild(el("div", { class: "user", text: item.user_message }));
+    c.appendChild(el("details", {}, [el("summary", { text: "Documentation the assistant saw" }), el("pre", { text: item.context })]));
+    if (item.observed_response) {
+      c.appendChild(el("details", {}, [el("summary", { text: "Production reply (may be wrong)" }),
+        el("pre", { text: JSON.stringify(item.observed_response, null, 2) })]));
+    }
+
+    const actionSel = el("select", { name: "action" }, ["answer", "tool_call", "decline"].map(a => {
+      const o = el("option", { value: a, text: a }); if (a === shown.action) o.selected = true; return o; }));
+    const toolSel = el("select", { name: "tool" }, DATA.tools.map(t => {
+      const o = el("option", { value: t, text: t }); if (shown.tool && t === shown.tool.name) o.selected = true; return o; }));
+    const firstArg = shown.tool ? Object.values(shown.tool.arguments || {})[0] || "" : "";
+    const argInput = el("input", { name: "arg", value: firstArg, placeholder: "key argument (invoice_id / account_id)" });
+    const facts = el("textarea", { name: "facts", placeholder: "one fact per line, e.g. $29 per month" });
+    facts.value = (shown.required_facts || []).join("\n");
+    const ref = el("textarea", { name: "reference" });
+    ref.value = shown.reference_answer || "";
+    const note = el("input", { name: "note", value: dec ? dec.note || "" : "", placeholder: "note (optional)" });
+
+    const toolBox = el("div", {}, [el("label", { text: "Tool and key argument" }), toolSel, argInput]);
+    const factsBox = el("div", { class: "full" }, [el("label", { text: "Required facts" }), facts]);
+    const sync = () => {
+      toolBox.style.display = actionSel.value === "tool_call" ? "" : "none";
+      factsBox.style.display = actionSel.value === "answer" ? "" : "none";
+    };
+    actionSel.addEventListener("change", sync);
+    c.appendChild(el("div", { class: "grid" }, [
+      el("div", {}, [el("label", { text: "Expected action" }), actionSel]), toolBox, factsBox,
+      el("div", { class: "full" }, [el("label", { text: "Reference answer" }), ref]),
+      el("div", { class: "full" }, [note])
+    ]));
+    sync();
+    (item.draft_warnings || []).forEach(w => c.appendChild(el("div", { class: "warn", text: "Draft check: " + w })));
+
+    const status = el("span", { class: "status", text: dec ? "Decision: " + dec.decision : "Pending" });
+    const accept = el("button", { class: "accept", text: "Accept" });
+    const reject = el("button", { class: "reject", text: "Reject" });
+    const undo = el("button", { text: "Undo" });
+    accept.addEventListener("click", () => {
+      const edited = readForm(c, item);
+      if (edited.action === "tool_call" && !edited.tool) return;
+      const changed = !item.expected || canonical(edited) !== canonical(item.expected);
+      decisions[item.item_id] = changed
+        ? { item_id: item.item_id, decision: "edit", expected: edited, note: note.value, reviewer: "human:html" }
+        : { item_id: item.item_id, decision: "accept", expected: null, note: note.value, reviewer: "human:html" };
+      save(); refresh(item.item_id);
+    });
+    reject.addEventListener("click", () => {
+      decisions[item.item_id] = { item_id: item.item_id, decision: "reject", expected: null, note: note.value, reviewer: "human:html" };
+      save(); refresh(item.item_id);
+    });
+    undo.addEventListener("click", () => { delete decisions[item.item_id]; save(); refresh(item.item_id); });
+    c.appendChild(el("div", { class: "actions" }, [accept, reject, undo, status]));
+    return c;
+  }
+
+  function refresh(changedId) {
+    const list = document.getElementById("list");
+    const filter = document.getElementById("filter").value;
+    if (changedId) {
+      const old = list.querySelector('[data-id="' + changedId + '"]');
+      const item = DATA.items.find(i => i.item_id === changedId);
+      if (old && item) old.replaceWith(card(item));
+    } else {
+      list.replaceChildren(...DATA.items.map(card));
+    }
+    list.querySelectorAll(".card").forEach(n => {
+      const st = n.getAttribute("data-state");
+      n.style.display = filter === "all" || filter === st ? "" : "none";
+    });
+    counts();
+  }
+
+  document.getElementById("filter").addEventListener("change", () => refresh());
+  document.getElementById("export").addEventListener("click", () => {
+    const out = DATA.items.filter(i => decisions[i.item_id]).map(i => decisions[i.item_id]);
+    const blob = new Blob([JSON.stringify(out, null, 2) + "\n"], { type: "application/json" });
+    const a = el("a", { href: URL.createObjectURL(blob), download: "decisions.json" });
+    document.body.appendChild(a); a.click(); a.remove();
+  });
+  document.getElementById("import").addEventListener("click", () => document.getElementById("importFile").click());
+  document.getElementById("importFile").addEventListener("change", ev => {
+    const f = ev.target.files[0]; if (!f) return;
+    f.text().then(t => {
+      const arr = JSON.parse(t);
+      (Array.isArray(arr) ? arr : arr.decisions || []).forEach(d => { decisions[d.item_id] = d; });
+      save(); refresh();
+    });
+  });
+  refresh();
+})();
+</script>
+</body>
+</html>
