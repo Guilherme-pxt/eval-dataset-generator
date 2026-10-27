@@ -1,0 +1,332 @@
+{
+  "verdict": "FAIL",
+  "reasons": [
+    "overall combined dropped by 0.553 (limit 0.05)",
+    "cluster 'bill / offer / discount' (n=9) dropped by 0.403 (limit 0.15)",
+    "29 items newly failing (limit 5)"
+  ],
+  "metric": "combined",
+  "items": 46,
+  "baseline_mean": 0.9266,
+  "candidate_mean": 0.3732,
+  "delta": -0.5534,
+  "delta_ci95": [
+    -0.683,
+    -0.4203
+  ],
+  "new_failures": [
+    "item-002",
+    "item-003",
+    "item-004",
+    "item-005",
+    "item-008",
+    "item-009",
+    "item-012",
+    "item-013",
+    "item-014",
+    "item-015",
+    "item-016",
+    "item-017",
+    "item-019",
+    "item-020",
+    "item-021",
+    "item-023",
+    "item-025",
+    "item-026",
+    "item-027",
+    "item-030",
+    "item-036",
+    "item-037",
+    "item-039",
+    "item-042",
+    "item-043",
+    "item-044",
+    "item-046",
+    "item-047",
+    "item-048"
+  ],
+  "fixed": [],
+  "per_cluster": [
+    {
+      "cluster_id": 0,
+      "label": "bill / offer / discount",
+      "n": 9,
+      "baseline": 0.9306,
+      "candidate": 0.5278,
+      "delta": -0.4028,
+      "gated": true,
+      "regressed": true
+    },
+    {
+      "cluster_id": 1,
+      "label": "growth / pric / plan",
+      "n": 3,
+      "baseline": 0.9167,
+      "candidate": 0.0,
+      "delta": -0.9167,
+      "gated": false,
+      "regressed": false
+    },
+    {
+      "cluster_id": 2,
+      "label": "backup / full / workspac",
+      "n": 1,
+      "baseline": 1.0,
+      "candidate": 0.0,
+      "delta": -1.0,
+      "gated": false,
+      "regressed": false
+    },
+    {
+      "cluster_id": 3,
+      "label": "trial / fre / card",
+      "n": 2,
+      "baseline": 1.0,
+      "candidate": 1.0,
+      "delta": 0.0,
+      "gated": false,
+      "regressed": false
+    },
+    {
+      "cluster_id": 4,
+      "label": "pay / includ / user",
+      "n": 1,
+      "baseline": 1.0,
+      "candidate": 0.0,
+      "delta": -1.0,
+      "gated": false,
+      "regressed": false
+    },
+    {
+      "cluster_id": 5,
+      "label": "refund / accountid / wrong",
+      "n": 3,
+      "baseline": 0.875,
+      "candidate": 0.8333,
+      "delta": -0.0417,
+      "gated": false,
+      "regressed": false
+    },
+    {
+      "cluster_id": 6,
+      "label": "day / trial / thx",
+      "n": 1,
+      "baseline": 1.0,
+      "candidate": 0.0,
+      "delta": -1.0,
+      "gated": false,
+      "regressed": false
+    },
+    {
+      "cluster_id": 7,
+      "label": "lin / item / tax",
+      "n": 1,
+      "baseline": 1.0,
+      "candidate": 0.0,
+      "delta": -1.0,
+      "gated": false,
+      "regressed": false
+    },
+    {
+      "cluster_id": 8,
+      "label": "starter / limit / plan",
+      "n": 1,
+      "baseline": 1.0,
+      "candidate": 0.25,
+      "delta": -0.75,
+      "gated": false,
+      "regressed": false
+    },
+    {
+      "cluster_id": 9,
+      "label": "month / growth / access",
+      "n": 2,
+      "baseline": 0.5,
+      "candidate": 0.0,
+      "delta": -0.5,
+      "gated": false,
+      "regressed": false
+    },
+    {
+      "cluster_id": 10,
+      "label": "payer / up / automatic",
+      "n": 1,
+      "baseline": 1.0,
+      "candidate": 0.375,
+      "delta": -0.625,
+      "gated": false,
+      "regressed": false
+    },
+    {
+      "cluster_id": 11,
+      "label": "support / sso / availabl",
+      "n": 1,
+      "baseline": 1.0,
+      "candidate": 0.0,
+      "delta": -1.0,
+      "gated": false,
+      "regressed": false
+    },
+    {
+      "cluster_id": 12,
+      "label": "sso / plan / whcih",
+      "n": 1,
+      "baseline": 1.0,
+      "candidate": 0.0,
+      "delta": -1.0,
+      "gated": false,
+      "regressed": false
+    },
+    {
+      "cluster_id": 13,
+      "label": "customer / weekend / open",
+      "n": 1,
+      "baseline": 0.0,
+      "candidate": 0.0,
+      "delta": 0.0,
+      "gated": false,
+      "regressed": false
+    },
+    {
+      "cluster_id": 14,
+      "label": "payment / charg / card",
+      "n": 2,
+      "baseline": 1.0,
+      "candidate": 0.0,
+      "delta": -1.0,
+      "gated": false,
+      "regressed": false
+    },
+    {
+      "cluster_id": 15,
+      "label": "data / stored / download",
+      "n": 1,
+      "baseline": 1.0,
+      "candidate": 0.0,
+      "delta": -1.0,
+      "gated": false,
+      "regressed": false
+    },
+    {
+      "cluster_id": 16,
+      "label": "annual / plan / discount",
+      "n": 1,
+      "baseline": 1.0,
+      "candidate": 1.0,
+      "delta": 0.0,
+      "gated": false,
+      "regressed": false
+    },
+    {
+      "cluster_id": 17,
+      "label": "lat / fee / maximum",
+      "n": 1,
+      "baseline": 1.0,
+      "candidate": 0.125,
+      "delta": -0.875,
+      "gated": false,
+      "regressed": false
+    },
+    {
+      "cluster_id": 18,
+      "label": "export / invoic / yen",
+      "n": 1,
+      "baseline": 1.0,
+      "candidate": 0.5,
+      "delta": -0.5,
+      "gated": false,
+      "regressed": false
+    },
+    {
+      "cluster_id": 19,
+      "label": "invoiceid / paid / client",
+      "n": 3,
+      "baseline": 1.0,
+      "candidate": 1.0,
+      "delta": 0.0,
+      "gated": false,
+      "regressed": false
+    },
+    {
+      "cluster_id": 20,
+      "label": "payout / tim / bank",
+      "n": 1,
+      "baseline": 1.0,
+      "candidate": 0.375,
+      "delta": -0.625,
+      "gated": false,
+      "regressed": false
+    },
+    {
+      "cluster_id": 21,
+      "label": "cup / won / world",
+      "n": 1,
+      "baseline": 1.0,
+      "candidate": 1.0,
+      "delta": 0.0,
+      "gated": false,
+      "regressed": false
+    },
+    {
+      "cluster_id": 22,
+      "label": "email / out / overdu",
+      "n": 1,
+      "baseline": 1.0,
+      "candidate": 0.2916,
+      "delta": -0.7084,
+      "gated": false,
+      "regressed": false
+    },
+    {
+      "cluster_id": 23,
+      "label": "sav / year / full",
+      "n": 1,
+      "baseline": 0.875,
+      "candidate": 0.0,
+      "delta": -0.875,
+      "gated": false,
+      "regressed": false
+    },
+    {
+      "cluster_id": 24,
+      "label": "automatically / interest / add",
+      "n": 1,
+      "baseline": 1.0,
+      "candidate": 0.125,
+      "delta": -0.875,
+      "gated": false,
+      "regressed": false
+    },
+    {
+      "cluster_id": 25,
+      "label": "help / received / chargeback",
+      "n": 1,
+      "baseline": 1.0,
+      "candidate": 0.875,
+      "delta": -0.125,
+      "gated": false,
+      "regressed": false
+    },
+    {
+      "cluster_id": 26,
+      "label": "fee / card / transaction",
+      "n": 3,
+      "baseline": 1.0,
+      "candidate": 0.0,
+      "delta": -1.0,
+      "gated": false,
+      "regressed": false
+    }
+  ],
+  "config": {
+    "metric": "combined",
+    "max_overall_drop": 0.05,
+    "max_cluster_drop": 0.15,
+    "min_cluster_items": 5,
+    "max_new_failures": 5,
+    "bootstrap_samples": 2000,
+    "seed": 42
+  },
+  "baseline": "baseline",
+  "candidate": "retrieval_outage"
+}

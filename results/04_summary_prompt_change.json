@@ -1,0 +1,227 @@
+{
+  "items": 46,
+  "valid_json_rate": 1.0,
+  "action_accuracy": 1.0,
+  "det_score": 0.9783,
+  "det_pass_rate": 0.9565,
+  "items_with_unsupported_numbers": 2,
+  "refusals": 0,
+  "judge_mean_1to5": 4.6304,
+  "judge_norm": 0.9076,
+  "judge_failures": 0,
+  "combined": 0.9429,
+  "judge_det_agreement": 0.8261,
+  "mean_latency_s": 5.2571,
+  "by_expected_action": {
+    "answer": {
+      "n": 34,
+      "det_score": 0.9706,
+      "combined": 0.9485
+    },
+    "tool_call": {
+      "n": 7,
+      "det_score": 1.0,
+      "combined": 0.9286
+    },
+    "decline": {
+      "n": 5,
+      "det_score": 1.0,
+      "combined": 0.925
+    }
+  },
+  "per_cluster": {
+    "0": {
+      "label": "bill / offer / discount",
+      "n": 9,
+      "det_score": 1.0,
+      "judge_norm": 0.9444,
+      "combined": 0.9722
+    },
+    "1": {
+      "label": "growth / pric / plan",
+      "n": 3,
+      "det_score": 1.0,
+      "judge_norm": 0.8333,
+      "combined": 0.9167
+    },
+    "2": {
+      "label": "backup / full / workspac",
+      "n": 1,
+      "det_score": 1.0,
+      "judge_norm": 0.5,
+      "combined": 0.75
+    },
+    "3": {
+      "label": "trial / fre / card",
+      "n": 2,
+      "det_score": 1.0,
+      "judge_norm": 1.0,
+      "combined": 1.0
+    },
+    "4": {
+      "label": "pay / includ / user",
+      "n": 1,
+      "det_score": 1.0,
+      "judge_norm": 0.75,
+      "combined": 0.875
+    },
+    "5": {
+      "label": "refund / accountid / wrong",
+      "n": 3,
+      "det_score": 1.0,
+      "judge_norm": 0.6667,
+      "combined": 0.8333
+    },
+    "6": {
+      "label": "day / trial / thx",
+      "n": 1,
+      "det_score": 1.0,
+      "judge_norm": 1.0,
+      "combined": 1.0
+    },
+    "7": {
+      "label": "lin / item / tax",
+      "n": 1,
+      "det_score": 1.0,
+      "judge_norm": 1.0,
+      "combined": 1.0
+    },
+    "8": {
+      "label": "starter / limit / plan",
+      "n": 1,
+      "det_score": 1.0,
+      "judge_norm": 1.0,
+      "combined": 1.0
+    },
+    "9": {
+      "label": "month / growth / access",
+      "n": 2,
+      "det_score": 1.0,
+      "judge_norm": 0.75,
+      "combined": 0.875
+    },
+    "10": {
+      "label": "payer / up / automatic",
+      "n": 1,
+      "det_score": 1.0,
+      "judge_norm": 1.0,
+      "combined": 1.0
+    },
+    "11": {
+      "label": "support / sso / availabl",
+      "n": 1,
+      "det_score": 1.0,
+      "judge_norm": 1.0,
+      "combined": 1.0
+    },
+    "12": {
+      "label": "sso / plan / whcih",
+      "n": 1,
+      "det_score": 1.0,
+      "judge_norm": 1.0,
+      "combined": 1.0
+    },
+    "13": {
+      "label": "customer / weekend / open",
+      "n": 1,
+      "det_score": 1.0,
+      "judge_norm": 1.0,
+      "combined": 1.0
+    },
+    "14": {
+      "label": "payment / charg / card",
+      "n": 2,
+      "det_score": 1.0,
+      "judge_norm": 1.0,
+      "combined": 1.0
+    },
+    "15": {
+      "label": "data / stored / download",
+      "n": 1,
+      "det_score": 1.0,
+      "judge_norm": 1.0,
+      "combined": 1.0
+    },
+    "16": {
+      "label": "annual / plan / discount",
+      "n": 1,
+      "det_score": 0.5,
+      "judge_norm": 0.75,
+      "combined": 0.625
+    },
+    "17": {
+      "label": "lat / fee / maximum",
+      "n": 1,
+      "det_score": 1.0,
+      "judge_norm": 1.0,
+      "combined": 1.0
+    },
+    "18": {
+      "label": "export / invoic / yen",
+      "n": 1,
+      "det_score": 1.0,
+      "judge_norm": 1.0,
+      "combined": 1.0
+    },
+    "19": {
+      "label": "invoiceid / paid / client",
+      "n": 3,
+      "det_score": 1.0,
+      "judge_norm": 1.0,
+      "combined": 1.0
+    },
+    "20": {
+      "label": "payout / tim / bank",
+      "n": 1,
+      "det_score": 1.0,
+      "judge_norm": 1.0,
+      "combined": 1.0
+    },
+    "21": {
+      "label": "cup / won / world",
+      "n": 1,
+      "det_score": 1.0,
+      "judge_norm": 0.75,
+      "combined": 0.875
+    },
+    "22": {
+      "label": "email / out / overdu",
+      "n": 1,
+      "det_score": 1.0,
+      "judge_norm": 0.5,
+      "combined": 0.75
+    },
+    "23": {
+      "label": "sav / year / full",
+      "n": 1,
+      "det_score": 0.5,
+      "judge_norm": 1.0,
+      "combined": 0.75
+    },
+    "24": {
+      "label": "automatically / interest / add",
+      "n": 1,
+      "det_score": 1.0,
+      "judge_norm": 1.0,
+      "combined": 1.0
+    },
+    "25": {
+      "label": "help / received / chargeback",
+      "n": 1,
+      "det_score": 1.0,
+      "judge_norm": 1.0,
+      "combined": 1.0
+    },
+    "26": {
+      "label": "fee / card / transaction",
+      "n": 3,
+      "det_score": 1.0,
+      "judge_norm": 1.0,
+      "combined": 1.0
+    }
+  },
+  "version": "prompt_change",
+  "model": "qwen2.5:7b",
+  "prompt": "v1-no-policy",
+  "judge_model": "qwen3.5:9b"
+}

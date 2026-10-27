@@ -1,0 +1,22 @@
+{
+  "lines_read": 303,
+  "records_kept": 300,
+  "records_rejected": 3,
+  "rejections": [
+    {
+      "line": 75,
+      "reason": "invalid JSON: Invalid control character at"
+    },
+    {
+      "line": 79,
+      "reason": "log[log-bad-2]: missing field 'user_message'"
+    },
+    {
+      "line": 254,
+      "reason": "log[log-bad-3].response: action must be one of ('answer', 'tool_call', 'decline'), got 'shrug'"
+    }
+  ],
+  "filtered_out": 0,
+  "pii_redactions": 7,
+  "unknown_doc_ids_dropped": 0
+}

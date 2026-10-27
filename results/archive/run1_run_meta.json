@@ -1,0 +1,89 @@
+{
+  "steps": {
+    "ingest": {
+      "lines_read": 303,
+      "records_kept": 300,
+      "records_rejected": 3,
+      "filtered_out": 0,
+      "pii_redactions": 7,
+      "unknown_doc_ids_dropped": 0,
+      "wall_s": 0.0
+    },
+    "cluster": {
+      "records": 300,
+      "near_duplicate_groups": 133,
+      "k": 27,
+      "selected": 48,
+      "selection_reasons": {
+        "representative": 27,
+        "failure_signal": 29,
+        "novel_in_cluster": 7,
+        "rare_cluster": 3
+      },
+      "records_with_signals": 63,
+      "diagnostics_vs_ground_truth": {
+        "cluster_purity_vs_intent": 0.72,
+        "intents_in_log": 24,
+        "intents_covered_by_selection": 21,
+        "rare_intents_covered": "6/8",
+        "failing_records_in_log": 49,
+        "failure_rate_in_log": 0.1633,
+        "selected_items_that_failed_in_production": 28,
+        "failure_rate_in_selection": 0.5833
+      },
+      "wall_s": 0.25
+    },
+    "draft": {
+      "model": "qwen3.5:9b",
+      "items": 48,
+      "failed": 0,
+      "with_warnings": 1,
+      "cached": 0,
+      "wall_s": 716.4,
+      "mean_latency_s": 14.89
+    },
+    "review": {
+      "accept": 30,
+      "edit": 16,
+      "reject": 2,
+      "undecided": 0,
+      "eval_items": 46,
+      "reviewers": [
+        "oracle"
+      ],
+      "decisions_file": "results/03_decisions.json",
+      "draft_acceptance_rate": 0.6522,
+      "wall_s": 0.01
+    },
+    "score": {
+      "baseline": {
+        "model": "qwen2.5:7b",
+        "prompt": "v1",
+        "predict_wall_s": 246.9,
+        "judge_wall_s": 345.5,
+        "combined": 0.9103,
+        "det_score": 0.9239
+      },
+      "candidate": {
+        "model": "qwen2.5-coder:7b",
+        "prompt": "v1",
+        "predict_wall_s": 201.1,
+        "judge_wall_s": 354.0,
+        "combined": 0.9239,
+        "det_score": 0.9348
+      },
+      "prompt_change": {
+        "model": "qwen2.5:7b",
+        "prompt": "v1-no-policy",
+        "predict_wall_s": 242.2,
+        "judge_wall_s": 233.3,
+        "combined": 0.9375,
+        "det_score": 0.9674
+      }
+    },
+    "run_all": {
+      "wall_s": 2339.8
+    }
+  },
+  "python": "3.14.8"
+}

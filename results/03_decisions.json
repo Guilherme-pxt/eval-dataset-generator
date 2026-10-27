@@ -1,0 +1,444 @@
+[
+  {
+    "item_id": "item-001",
+    "decision": "accept",
+    "expected": null,
+    "note": "",
+    "reviewer": "oracle"
+  },
+  {
+    "item_id": "item-002",
+    "decision": "accept",
+    "expected": null,
+    "note": "",
+    "reviewer": "oracle"
+  },
+  {
+    "item_id": "item-003",
+    "decision": "accept",
+    "expected": null,
+    "note": "",
+    "reviewer": "oracle"
+  },
+  {
+    "item_id": "item-004",
+    "decision": "accept",
+    "expected": null,
+    "note": "",
+    "reviewer": "oracle"
+  },
+  {
+    "item_id": "item-005",
+    "decision": "edit",
+    "expected": {
+      "action": "answer",
+      "tool": null,
+      "required_facts": [
+        "2 business days"
+      ],
+      "reference_answer": "Payouts arrive in your bank account 2 business days after the payment clears."
+    },
+    "note": "fact too long to check reliably: 'Payouts arrive in your bank account 2 bu...'",
+    "reviewer": "oracle"
+  },
+  {
+    "item_id": "item-006",
+    "decision": "accept",
+    "expected": null,
+    "note": "",
+    "reviewer": "oracle"
+  },
+  {
+    "item_id": "item-007",
+    "decision": "accept",
+    "expected": null,
+    "note": "",
+    "reviewer": "oracle"
+  },
+  {
+    "item_id": "item-008",
+    "decision": "edit",
+    "expected": {
+      "action": "answer",
+      "tool": null,
+      "required_facts": [
+        "$29 per month"
+      ],
+      "reference_answer": "The Growth plan costs $29 per month and includes up to 5 users with unlimited invoices."
+    },
+    "note": "fact not needed for this question: 'up to 5 users'; fact not needed for this question: 'unlimited invoices'",
+    "reviewer": "oracle"
+  },
+  {
+    "item_id": "item-009",
+    "decision": "edit",
+    "expected": {
+      "action": "answer",
+      "tool": null,
+      "required_facts": [
+        "CSV"
+      ],
+      "reference_answer": "Yes, you can export clients, invoices, and payments as CSV from Settings > Data."
+    },
+    "note": "fact not needed for this question: 'Settings > Data'",
+    "reviewer": "oracle"
+  },
+  {
+    "item_id": "item-010",
+    "decision": "reject",
+    "expected": null,
+    "note": "ambiguous request: no single correct output",
+    "reviewer": "oracle"
+  },
+  {
+    "item_id": "item-011",
+    "decision": "reject",
+    "expected": null,
+    "note": "ambiguous request: no single correct output",
+    "reviewer": "oracle"
+  },
+  {
+    "item_id": "item-012",
+    "decision": "accept",
+    "expected": null,
+    "note": "",
+    "reviewer": "oracle"
+  },
+  {
+    "item_id": "item-013",
+    "decision": "accept",
+    "expected": null,
+    "note": "",
+    "reviewer": "oracle"
+  },
+  {
+    "item_id": "item-014",
+    "decision": "accept",
+    "expected": null,
+    "note": "",
+    "reviewer": "oracle"
+  },
+  {
+    "item_id": "item-015",
+    "decision": "accept",
+    "expected": null,
+    "note": "",
+    "reviewer": "oracle"
+  },
+  {
+    "item_id": "item-016",
+    "decision": "accept",
+    "expected": null,
+    "note": "",
+    "reviewer": "oracle"
+  },
+  {
+    "item_id": "item-017",
+    "decision": "edit",
+    "expected": {
+      "action": "answer",
+      "tool": null,
+      "required_facts": [
+        "Scale plan"
+      ],
+      "reference_answer": "Single sign-on (SSO) with SAML is included in the Scale plan."
+    },
+    "note": "fact not needed for this question: 'Single sign-on (SSO) with SAML'",
+    "reviewer": "oracle"
+  },
+  {
+    "item_id": "item-018",
+    "decision": "accept",
+    "expected": null,
+    "note": "",
+    "reviewer": "oracle"
+  },
+  {
+    "item_id": "item-019",
+    "decision": "accept",
+    "expected": null,
+    "note": "",
+    "reviewer": "oracle"
+  },
+  {
+    "item_id": "item-020",
+    "decision": "accept",
+    "expected": null,
+    "note": "",
+    "reviewer": "oracle"
+  },
+  {
+    "item_id": "item-021",
+    "decision": "edit",
+    "expected": {
+      "action": "answer",
+      "tool": null,
+      "required_facts": [
+        "Scale plan"
+      ],
+      "reference_answer": "Yes, we support SSO. Single sign-on (SSO) with SAML is included in the Scale plan."
+    },
+    "note": "fact not needed for this question: 'Two-factor authentication available'",
+    "reviewer": "oracle"
+  },
+  {
+    "item_id": "item-022",
+    "decision": "accept",
+    "expected": null,
+    "note": "",
+    "reviewer": "oracle"
+  },
+  {
+    "item_id": "item-023",
+    "decision": "edit",
+    "expected": {
+      "action": "answer",
+      "tool": null,
+      "required_facts": [
+        "$29 per month"
+      ],
+      "reference_answer": "The Growth plan costs $29 per month and includes up to 5 users and unlimited invoices."
+    },
+    "note": "fact not needed for this question: 'up to 5 users'; fact not needed for this question: 'unlimited invoices'",
+    "reviewer": "oracle"
+  },
+  {
+    "item_id": "item-024",
+    "decision": "accept",
+    "expected": null,
+    "note": "",
+    "reviewer": "oracle"
+  },
+  {
+    "item_id": "item-025",
+    "decision": "edit",
+    "expected": {
+      "action": "answer",
+      "tool": null,
+      "required_facts": [
+        "120 requests per minute"
+      ],
+      "reference_answer": "The REST API is available on the Scale plan only, with a rate limit of 120 requests per minute per workspace."
+    },
+    "note": "fact not needed for this question: 'Scale plan only'",
+    "reviewer": "oracle"
+  },
+  {
+    "item_id": "item-026",
+    "decision": "edit",
+    "expected": {
+      "action": "answer",
+      "tool": null,
+      "required_facts": [
+        "1.5% per month"
+      ],
+      "reference_answer": "Yes, late fees can be enabled per client at up to 1.5% per month on the overdue balance."
+    },
+    "note": "fact not needed for this question: 'Late fees can be enabled per client'; fact too long to check reliably: 'up to 1.5% per month on the overdue bala...'",
+    "reviewer": "oracle"
+  },
+  {
+    "item_id": "item-027",
+    "decision": "accept",
+    "expected": null,
+    "note": "",
+    "reviewer": "oracle"
+  },
+  {
+    "item_id": "item-028",
+    "decision": "accept",
+    "expected": null,
+    "note": "",
+    "reviewer": "oracle"
+  },
+  {
+    "item_id": "item-029",
+    "decision": "accept",
+    "expected": null,
+    "note": "",
+    "reviewer": "oracle"
+  },
+  {
+    "item_id": "item-030",
+    "decision": "accept",
+    "expected": null,
+    "note": "",
+    "reviewer": "oracle"
+  },
+  {
+    "item_id": "item-031",
+    "decision": "accept",
+    "expected": null,
+    "note": "",
+    "reviewer": "oracle"
+  },
+  {
+    "item_id": "item-032",
+    "decision": "accept",
+    "expected": null,
+    "note": "",
+    "reviewer": "oracle"
+  },
+  {
+    "item_id": "item-033",
+    "decision": "edit",
+    "expected": {
+      "action": "answer",
+      "tool": null,
+      "required_facts": [
+        "no credit card"
+      ],
+      "reference_answer": "No, you do not need a credit card to start the 14-day free trial of the Growth plan."
+    },
+    "note": "fact not needed for this question: '14-day free trial'",
+    "reviewer": "oracle"
+  },
+  {
+    "item_id": "item-034",
+    "decision": "accept",
+    "expected": null,
+    "note": "",
+    "reviewer": "oracle"
+  },
+  {
+    "item_id": "item-035",
+    "decision": "accept",
+    "expected": null,
+    "note": "",
+    "reviewer": "oracle"
+  },
+  {
+    "item_id": "item-036",
+    "decision": "accept",
+    "expected": null,
+    "note": "",
+    "reviewer": "oracle"
+  },
+  {
+    "item_id": "item-037",
+    "decision": "accept",
+    "expected": null,
+    "note": "",
+    "reviewer": "oracle"
+  },
+  {
+    "item_id": "item-038",
+    "decision": "accept",
+    "expected": null,
+    "note": "",
+    "reviewer": "oracle"
+  },
+  {
+    "item_id": "item-039",
+    "decision": "accept",
+    "expected": null,
+    "note": "",
+    "reviewer": "oracle"
+  },
+  {
+    "item_id": "item-040",
+    "decision": "edit",
+    "expected": {
+      "action": "answer",
+      "tool": null,
+      "required_facts": [
+        "Monday to Friday"
+      ],
+      "reference_answer": "No, chat support is available Monday to Friday (24/5), not on weekends."
+    },
+    "note": "fact not needed for this question: 'Chat support is available 24/5'",
+    "reviewer": "oracle"
+  },
+  {
+    "item_id": "item-041",
+    "decision": "accept",
+    "expected": null,
+    "note": "",
+    "reviewer": "oracle"
+  },
+  {
+    "item_id": "item-042",
+    "decision": "edit",
+    "expected": {
+      "action": "answer",
+      "tool": null,
+      "required_facts": [
+        "Scale plan"
+      ],
+      "reference_answer": "Yes, Single sign-on (SSO) with SAML is included in the Scale plan."
+    },
+    "note": "fact not needed for this question: 'Single sign-on (SSO) with SAML'",
+    "reviewer": "oracle"
+  },
+  {
+    "item_id": "item-043",
+    "decision": "edit",
+    "expected": {
+      "action": "answer",
+      "tool": null,
+      "required_facts": [
+        "20% discount"
+      ],
+      "reference_answer": "Paying annually gives a 20% discount on any plan. The Starter plan is $12 per month, the Growth plan is $29 per month, and the Scale plan is $79 per month."
+    },
+    "note": "missing required fact '20% discount'; fact not needed for this question: '$12 per month'; fact not needed for this question: '$29 per month'; fact not needed for this question: '$79 per month'",
+    "reviewer": "oracle"
+  },
+  {
+    "item_id": "item-044",
+    "decision": "accept",
+    "expected": null,
+    "note": "",
+    "reviewer": "oracle"
+  },
+  {
+    "item_id": "item-045",
+    "decision": "accept",
+    "expected": null,
+    "note": "",
+    "reviewer": "oracle"
+  },
+  {
+    "item_id": "item-046",
+    "decision": "edit",
+    "expected": {
+      "action": "answer",
+      "tool": null,
+      "required_facts": [
+        "50 invoices per month",
+        "1 user"
+      ],
+      "reference_answer": "The Starter plan costs $12 per month and includes 1 user with a limit of up to 50 invoices per month."
+    },
+    "note": "fact not needed for this question: '$12 per month'",
+    "reviewer": "oracle"
+  },
+  {
+    "item_id": "item-047",
+    "decision": "edit",
+    "expected": {
+      "action": "answer",
+      "tool": null,
+      "required_facts": [
+        "$29 per month"
+      ],
+      "reference_answer": "The Growth plan costs $29 per month and includes up to 5 users with unlimited invoices."
+    },
+    "note": "fact not needed for this question: 'up to 5 users'; fact not needed for this question: 'unlimited invoices'",
+    "reviewer": "oracle"
+  },
+  {
+    "item_id": "item-048",
+    "decision": "edit",
+    "expected": {
+      "action": "answer",
+      "tool": null,
+      "required_facts": [
+        "$29 per month"
+      ],
+      "reference_answer": "The Growth plan costs $29 per month and includes up to 5 users."
+    },
+    "note": "fact not needed for this question: 'includes up to 5 users'",
+    "reviewer": "oracle"
+  }
+]
