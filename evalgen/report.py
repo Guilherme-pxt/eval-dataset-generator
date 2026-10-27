@@ -58,6 +58,9 @@ def render_report(summaries: dict, gates: list[dict], meta: dict, clusters: dict
 
     for g in gates:
         out += [f"## Gate: {g['candidate']} vs {g['baseline']}: **{g['verdict']}**", ""]
+        c = g["config"]
+        out.append(f"- thresholds: overall drop > {c['max_overall_drop']}, cluster drop > {c['max_cluster_drop']} "
+                   f"(clusters with n >= {c['min_cluster_items']}), newly failing items > {c['max_new_failures']}")
         out.append(f"- {g['metric']}: {g['baseline_mean']} -> {g['candidate_mean']} "
                    f"(delta {g['delta']:+.3f}, paired bootstrap 95% CI [{g['delta_ci95'][0]:+.3f}, {g['delta_ci95'][1]:+.3f}])")
         out.append(f"- items newly failing: {len(g['new_failures'])}, items fixed: {len(g['fixed'])}")
